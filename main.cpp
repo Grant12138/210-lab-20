@@ -54,30 +54,49 @@ class Chair {
         }
 };
 
-int main() {
+void print_id(string const& lab_desc);
+
+int main()
+{
+    print_id("Lab 20: Chair Maker 3000");
+
     srand(time(0));
 
     cout << fixed << setprecision(2);
+
 //creating pointer to first chair object
     Chair *chairPtr = new Chair;
-    chairPtr->setLegs(4);
-    chairPtr->setPrices(121.21, 232.32, 414.14);
+    cout << "ChairPtr (Default Constructor):" << endl;
     chairPtr->print();
+
 //creating dynamic chair object with constructor
-    Chair *livingChair = new Chair(3);
-    livingChair->setPrices(525.25, 434.34, 252.52);
+    double customPrices[SIZE] = {525.25, 434.34, 252.52};
+    Chair *livingChair = new Chair(3, customPrices);
+    cout << "LivingChair (Parametrized Constructor):" << endl;
     livingChair->print();
+
     delete livingChair;
     livingChair = nullptr;
 //creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
-    collection[0].setLegs(4);
-    collection[0].setPrices(441.41, 552.52, 663.63);
-    collection[1].setLegs(4);
-    collection[1].setPrices(484.84, 959.59, 868.68);
-    collection[2].setLegs(4);
-    collection[2].setPrices(626.26, 515.15, 757.57);
+    cout << "Collection of Chairs (Default Constructors):" << endl;
     for (int i = 0; i < SIZE; i++)
+    {
+        cout << "Chair " << i + 1 << ":" << endl;
         collection[i].print();
+    }
+
+    delete[] collection;
+    collection = nullptr;
+
     return 0;
+}
+
+void print_id(string const& lab_desc)
+{
+    cout << "\nCOMSC210 | Grant Luo | " << lab_desc << "\n";
+    cout << "Editor: CLion\n";
+    cout << "Compiler: Apple clang version 16.0.0\n";
+    cout << "File: " << __FILE__ << "\n";
+    cout << "Compiled: " << __DATE__ << " at " << __TIME__ << "\n\n";
 }
